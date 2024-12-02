@@ -1,0 +1,14 @@
+eln-cache/
+eshell/
+emacs_backup/
+transient/
+elpa/
+auto-save-list/
+init.el~
+emacs.org~
+.org-id-locations
+tramp
+bookmarks
+org-roam.db
+nov-places
+history
