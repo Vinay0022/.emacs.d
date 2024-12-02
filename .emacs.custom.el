@@ -10,7 +10,7 @@
  '(inhibit-startup-screen t)
  '(org-agenda-files '("/home/reji/org/tasks.org" "/home/reji/org/habits.org"))
  '(package-selected-packages
-   '(exwm nov org-roam consult marginalia ivy-rich swiper doom-modeline evil-org org-bullets evil-escape evil orderless vertico modus-themes gruber-darker-theme)))
+   '(desktop-environment evil-collection magit exwm nov org-roam consult marginalia ivy-rich swiper doom-modeline evil-org org-bullets evil-escape evil orderless vertico modus-themes gruber-darker-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

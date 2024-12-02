@@ -66,3 +66,23 @@
 		    (number-sequence 0 9))))
 
   (exwm-enable))
+
+(use-package desktop-environment
+      :ensure t
+      :after exwm
+      :config (desktop-environment-mode)
+      :custom
+      (desktop-environment-brightness-small-increment "2%+")
+      (desktop-environment-brightness-small-decrement "2%-")
+      (desktop-environment-brightness-normal-increment "5%+")
+      (desktop-environment-brightness-normal-decrement "5%-"))
+
+  (defun efs/run-in-background (command)
+    (let ((command-parts (split-string command "[ ]+")))
+      (apply #'call-process `(,(car command-parts) nil 0 nil ,@(cdr command-parts)))))
+
+
+;; Launch apps that will run in the background
+(efs/run-in-background "nm-applet")
+(efs/run-in-background "pasystray")
+(efs/run-in-background "blueman-applet")

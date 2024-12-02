@@ -1,31 +1,40 @@
 (setq frame-resize-pixelwise t)
-	    (setq custom-file "~/.emacs.d/.emacs.custom.el")
-
-    (add-hook 'text-mode-hook 'visual-line-mode)
-	    (tool-bar-mode -1)
-	    (menu-bar-mode -1)
-	    (scroll-bar-mode -1)
-	    (global-display-line-numbers-mode)
+	      (setq custom-file "~/.emacs.d/.emacs.custom.el")
 
 
-	    (load-file custom-file)
+;;show battery, data and time 
+(display-battery-mode 1)
+(setq display-time-day-and-date 1)
+(display-time-mode 1)
 
-	(setq display-line-numbers-type 'relative)
-      (setq backup-directory-alist '(("." . "~/.emacs.d/emacs_backup")))
+;; The default is 800 kilobytes.  Measured in bytes.
+(setq gc-cons-threshold (* 50 1000 1000))
 
-  (dolist (mode `(shell-mode-hook
-  eshell-mode-hook
-term-mode-hook))
-  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+      (add-hook 'text-mode-hook 'visual-line-mode)
+	      (tool-bar-mode -1)
+	      (menu-bar-mode -1)
+	      (scroll-bar-mode -1)
+	      (global-display-line-numbers-mode)
+
+
+	      (load-file custom-file)
+
+	  (setq display-line-numbers-type 'relative)
+	(setq backup-directory-alist '(("." . "~/.emacs.d/emacs_backup")))
+
+    (dolist (mode `(shell-mode-hook
+    eshell-mode-hook
+  term-mode-hook))
+    (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 (set-face-attribute 'default nil :family "Hack Bold" :height 150)
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
+(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 ;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
 ;; and `package-pinned-packages`. Most users will not need or want to do this.
-(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 
 (use-package vertico
@@ -74,6 +83,9 @@ term-mode-hook))
 
 	     (use-package evil
 	     :ensure t
+             :init
+             (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
+             (setq evil-want-keybinding nil)
 	     :config
 	     (evil-mode 1))
 
@@ -150,6 +162,15 @@ term-mode-hook))
    :ensure t
    :init
    (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode)))
+
+(use-package magit
+:ensure t)
+
+    (use-package evil-collection
+     :ensure t
+     :after evil
+     :config
+     (evil-collection-init))
 
 ;; Automatically tangle our Emacs.org config file when we save it
 (defun efs/org-babel-tangle-config ()
