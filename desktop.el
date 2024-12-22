@@ -13,12 +13,13 @@
 
   ;; Set the screen resolution (update this to be the correct resolution for your screen!)
   (require 'exwm-randr)
-  (exwm-randr-enable)
+  (setq exwm-systemtray-height 26)
+  (exwm-randr-mode 1)
   ;; (start-process-shell-command "xrandr" nil "xrandr --output Virtual-1 --primary --mode 2048x1152 --pos 0x0 --rotate normal")
 
   ;; Load the system tray before exwm-init
   (require 'exwm-systemtray)
-  (exwm-systemtray-enable)
+  (exwm-systemtray-mode 1)
 
   ;; These keys should always pass through to Emacs
   (setq exwm-input-prefix-keys
@@ -83,6 +84,20 @@
 
 
 ;; Launch apps that will run in the background
-(efs/run-in-background "nm-applet")
 (efs/run-in-background "pasystray")
 (efs/run-in-background "blueman-applet")
+(efs/run-in-background "nm-applet")
+(efs/run-in-background "dunst")
+
+(defun efs/disable-desktop-notifications ()
+  (interactive)
+  (start-process-shell-command "dunstctl" nil "dunstctl set-paused true"))
+
+(defun efs/enable-desktop-notifications ()
+  (interactive)
+  (start-process-shell-command "dunstctl" nil "dunstctl set-paused false"))
+
+(defun efs/dunstctl (command)
+(start-process-shell-command "dunstctl" nil (concat "dunstctl " command)))
+
+(exwm-input-set-key (kbd "s-n") (lambda () (interactive) (efs/dunstctl "history-pop")))
