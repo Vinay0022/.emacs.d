@@ -1,30 +1,31 @@
 (setq frame-resize-pixelwise t)
-	      (setq custom-file "~/.emacs.d/.emacs.custom.el")
+		  (setq custom-file "~/.emacs.d/.emacs.custom.el")
+(load-theme 'gruber-darker t nil)
+
+    ;;show battery, data and time 
+    (display-battery-mode 1)
+    (setq display-time-day-and-date 1)
+    (display-time-mode 1)
+
+    ;; The default is 800 kilobytes.  Measured in bytes.
+    (setq gc-cons-threshold (* 50 1000 1000))
+
+	  (add-hook 'text-mode-hook 'visual-line-mode)
+		  (tool-bar-mode -1)
+		  (menu-bar-mode -1)
+		  (scroll-bar-mode -1)
+		  (global-display-line-numbers-mode)
+		  (load-file custom-file)
 
 
-;;show battery, data and time 
-(display-battery-mode 1)
-(setq display-time-day-and-date 1)
-(display-time-mode 1)
+	      (setq display-line-numbers-type 'relative)
+	    (setq backup-directory-alist '(("." . "~/.emacs.d/emacs_backup")))
 
-;; The default is 800 kilobytes.  Measured in bytes.
-(setq gc-cons-threshold (* 50 1000 1000))
-
-      (add-hook 'text-mode-hook 'visual-line-mode)
-	      (tool-bar-mode -1)
-	      (menu-bar-mode -1)
-	      (scroll-bar-mode -1)
-	      (global-display-line-numbers-mode)
-	      (load-file custom-file)
-
-
-	  (setq display-line-numbers-type 'relative)
-	(setq backup-directory-alist '(("." . "~/.emacs.d/emacs_backup")))
-
-    (dolist (mode `(shell-mode-hook
-    eshell-mode-hook
-  term-mode-hook))
-    (add-hook mode (lambda () (display-line-numbers-mode 0))))
+	(dolist (mode `(shell-mode-hook
+	eshell-mode-hook
+	vterm-mode-hook
+      term-mode-hook))
+	(add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 (set-face-attribute 'default nil :family "Hack Bold" :height 150)
 
@@ -258,6 +259,9 @@
 
 	(use-package mpv
       :ensure t)
+
+(use-package vterm
+:ensure t)
 
 ;; Automatically tangle our Emacs.org config file when we save it
 (defun efs/org-babel-tangle-config ()

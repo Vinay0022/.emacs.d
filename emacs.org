@@ -8,7 +8,7 @@
 
 		(setq frame-resize-pixelwise t)
 		  (setq custom-file "~/.emacs.d/.emacs.custom.el")
-
+(load-theme 'gruber-darker t nil)
 
     ;;show battery, data and time 
     (display-battery-mode 1)
@@ -31,6 +31,7 @@
 
 	(dolist (mode `(shell-mode-hook
 	eshell-mode-hook
+	vterm-mode-hook
       term-mode-hook))
 	(add-hook mode (lambda () (display-line-numbers-mode 0))))
 
@@ -323,6 +324,11 @@
 	  (use-package mpv
 	:ensure t)
 #+end_src 
+* Shell configuration
+#+begin_src emacs-lisp
+       (use-package vterm
+     :ensure t)
+#+end_src
 * Auto-Tangle Configuration
 
 #+begin_src emacs-lisp
