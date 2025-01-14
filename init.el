@@ -261,7 +261,11 @@
       :ensure t)
 
 (use-package vterm
-:ensure t)
+      :ensure t)
+      (use-package exec-path-from-shell
+    :ensure t
+  :config
+(exec-path-from-shell-initialize))
 
 ;; Automatically tangle our Emacs.org config file when we save it
 (defun efs/org-babel-tangle-config ()
