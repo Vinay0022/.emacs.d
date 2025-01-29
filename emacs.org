@@ -14,7 +14,7 @@
       (display-battery-mode 1)
       (setq display-time-day-and-date 1)
       (display-time-mode 1)
- (setq inhibit-splash-screen nil) 
+ (setq inhibit-splash-screen t) 
 
       ;; The default is 800 kilobytes.  Measured in bytes.
       (setq gc-cons-threshold (* 50 1000 1000))
