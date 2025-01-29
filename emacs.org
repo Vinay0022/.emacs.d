@@ -6,37 +6,42 @@
 
 #+begin_src emacs-lisp
 
-		(setq frame-resize-pixelwise t)
-		  (setq custom-file "~/.emacs.d/.emacs.custom.el")
-(load-theme 'gruber-darker t nil)
+  		(setq frame-resize-pixelwise t)
+  		  (setq custom-file "~/.emacs.d/.emacs.custom.el")
+  (load-theme 'gruber-darker t nil)
 
-    ;;show battery, data and time 
-    (display-battery-mode 1)
-    (setq display-time-day-and-date 1)
-    (display-time-mode 1)
+      ;;show battery, data and time 
+      (display-battery-mode 1)
+      (setq display-time-day-and-date 1)
+      (display-time-mode 1)
+ (setq inhibit-splash-screen nil) 
 
-    ;; The default is 800 kilobytes.  Measured in bytes.
-    (setq gc-cons-threshold (* 50 1000 1000))
+      ;; The default is 800 kilobytes.  Measured in bytes.
+      (setq gc-cons-threshold (* 50 1000 1000))
 
-	  (add-hook 'text-mode-hook 'visual-line-mode)
-		  (tool-bar-mode -1)
-		  (menu-bar-mode -1)
-		  (scroll-bar-mode -1)
-		  (global-display-line-numbers-mode)
-		  (load-file custom-file)
+  	  (add-hook 'text-mode-hook 'visual-line-mode)
+  		  (tool-bar-mode -1)
+  		  (menu-bar-mode -1)
+  		  (scroll-bar-mode -1)
+  		  (global-display-line-numbers-mode)
+  		  (load-file custom-file)
 
 
-	      (setq display-line-numbers-type 'relative)
-	    (setq backup-directory-alist '(("." . "~/.emacs.d/emacs_backup")))
+  	      (setq display-line-numbers-type 'relative)
+  ;; backup and autosave file config
+  	    (setq backup-directory-alist '(("." . "~/.emacs.d/emacs_backup")))
 
-	(dolist (mode `(shell-mode-hook
-	eshell-mode-hook
-	vterm-mode-hook
-      term-mode-hook))
-	(add-hook mode (lambda () (display-line-numbers-mode 0))))
+  (setq auto-save-file-name-transforms
+  `((".*" "~/.emacs.d/.emacs-saves/" t)))
 
-   
-  
+  	(dolist (mode `(shell-mode-hook
+  	eshell-mode-hook
+  	vterm-mode-hook
+        term-mode-hook))
+  	(add-hook mode (lambda () (display-line-numbers-mode 0))))
+
+     
+    
 
 #+end_src
 
@@ -44,7 +49,15 @@
 
 #+begin_src emacs-lisp
 
-  (set-face-attribute 'default nil :family "Hack Bold" :height 150)
+    (set-face-attribute 'default nil :family "Hack Bold" :height 150)
+  (use-package nerd-icons
+    :ensure t
+    :custom
+    (nerd-icons-font-family "FiraCode Nerd Font")
+    ;; The Nerd Font you want to use in GUI
+    ;; "Symbols Nerd Font Mono" is the default and is recommended
+    ;; but you can use any other Nerd Font if you want
+    )
 
 #+end_src
 
